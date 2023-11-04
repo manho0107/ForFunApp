@@ -6,15 +6,28 @@ import {
   Button
 } from 'react-native';
 
-function ToDoForm() {
+function ToDoForm({ onAdd, tasks }) {
+  const [taskText, setTaskText] = React.useState('');
+
+  const handleAdd = () => {
+    if (tasks.includes(taskText)) {
+      alert('Entered word(s) is duplicated.');
+      return;
+    }
+    onAdd(taskText);
+    setTaskText(''); // reset the taskText state to clear the entered text in the text box
+  }
+
   return (
     <>
     <View style={styles.form}>
         <TextInput
           style={styles.input}
           placeholder="Add a new task..."
+          onChangeText={(text) => setTaskText(text)}
+          value={taskText}
         />
-        <Button title="Add" />
+        <Button title="Add" onPress={handleAdd}/>
       </View>
     </>
   );
