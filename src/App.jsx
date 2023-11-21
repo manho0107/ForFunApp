@@ -5,34 +5,35 @@
  */
 
 import React, { useState} from 'react';
-import {
-  SafeAreaView,
-} from 'react-native';
+import { StyleSheet} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import ToDoList from './ToDoList';
-import ToDoForm from './ToDoForm';
+import HomeScreen from './screens/AboutScreen';
+import AboutScreen from './screens/HomeScreen';
+
+import ToDoList from './components/ToDoList';
+import ToDoForm from './components/ToDoForm';
+
+const Stack = createStackNavigator();
 
 function App() {
-  const [tasks, setTasks] = useState([
-    'Do laundry',
-    'Go to gym',
-    'Walk dog',
-    'Study'
-  ]);
-
-  const handleAdd = (newTask) => {
-    //setTasks(tasks.concat(newTask))
-    //.push can just add number 
-    setTasks([...tasks, newTask])
-  };
 
   return (
-    <SafeAreaView>
-      <ToDoList tasks={tasks}/>
-      <ToDoForm onAdd={handleAdd} tasks={tasks}/>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="AboutScreen" component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
+const styles = StyleSheet.create({
+
+});
 
 export default App;
+
+// <NavigationContainer> /* root component*/
+// <Stack.Screen name="AboutScreen" component={AboutScreen} /> name is the identifier
