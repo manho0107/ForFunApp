@@ -7,7 +7,6 @@ import {
   ScrollView,
 } from 'react-native';
 
-
 function ToDoList(props) {
   const { tasks } = props;
 

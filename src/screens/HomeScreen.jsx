@@ -1,6 +1,5 @@
-import React from 'react';
-import { SafeAreaView, Button } from 'react-native';
-
+import React, { useState } from 'react';
+import { SafeAreaView, Button, StyleSheet, View } from 'react-native';
 import ToDoList from '../components/ToDoList';
 import ToDoForm from '../components/ToDoForm';
 import MainLayout from '../layouts/MainLayout';
@@ -13,25 +12,39 @@ function HomeScreen({ navigation }) {
         'Study'
       ]);
     
-    const handleAdd = (newTask) => {
-        //setTasks(tasks.concat(newTask))
-        //.push can just add number 
-        setTasks([...tasks, newTask])
-    };
+      const handleAdd = (newTask) => {
+        console.log('Adding task:', newTask); // check if handleAdd is called
+        setTasks(prevTasks => {
+          console.log('Current tasks:', prevTasks); // check current tasks
+          return [...prevTasks, newTask]; // add the new task
+        });
+      };
+      
 
     return (
         <>
-            <SafeAreaView>
-                <ToDoList tasks={tasks}/>
-                <ToDoForm handleAdd={handleAdd}/>
-                    <Button
-                        title="Go to About Page"
-                        onPress={() => navigation.navigate('AboutScreen')}
-                    />
-            </SafeAreaView>
+            <MainLayout>
+                <SafeAreaView>
+                    <ToDoList tasks={tasks}/>
+                    <ToDoForm onAdd={handleAdd} tasks={tasks}/>
+                        <View style={styles.container}>
+                            <Button
+                                title="Go to About Page"
+                                onPress={() => navigation.navigate('AboutScreen')}
+                            />
+                        </View>
+                </SafeAreaView>
+            </MainLayout>
         </>
     );
+
 }
+
+    const styles = StyleSheet.create({
+        container: {
+            marginTop: 270,
+        },
+    });
 
 export default HomeScreen;
 

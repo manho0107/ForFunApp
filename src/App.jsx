@@ -4,16 +4,11 @@
  * @format
  */
 
-import React, { useState} from 'react';
-import { StyleSheet} from 'react-native';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-import HomeScreen from './screens/AboutScreen';
-import AboutScreen from './screens/HomeScreen';
-
-import ToDoList from './components/ToDoList';
-import ToDoForm from './components/ToDoForm';
+import HomeScreen from './screens/HomeScreen';
+import AboutScreen from './screens/AboutScreen';
 
 const Stack = createStackNavigator();
 
@@ -29,9 +24,9 @@ function App() {
   );
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
 
-});
+});*/
 
 export default App;
 

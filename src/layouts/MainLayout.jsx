@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 const MainLayout = ({ children }) => {
   return (
     <View style={styles.container}>
+      <Header title="For Fun App" />
       {children}
+      <Footer />
     </View>
   );
 };

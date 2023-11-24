@@ -5,18 +5,41 @@ import {
   TextInput,
   Button
 } from 'react-native';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 
-function ToDoForm({ onAdd, tasks }) {
-  const [taskText, setTaskText] = React.useState('');
+function ToDoForm({ onAdd = () => {}, tasks = [] }) {
+  const [taskText, setTaskText] = useState('');
+
 
   const handleAdd = () => {
+    console.log(onAdd); // log to see what onAdd currently is
+    if (tasks.includes(taskText)) {
+      alert('Entered word(s) is duplicated.');
+      return;
+    }
+    if (typeof onAdd === 'function') {
+      onAdd(taskText);
+      setTaskText('');
+    } else {
+      console.error('onAdd is not a function', onAdd);
+    }
+  }
+    
+  /*const handleAdd = () => {
     if (tasks.includes(taskText)) {
       alert('Entered word(s) is duplicated.');
       return;
     }
     onAdd(taskText);
     setTaskText(''); // reset the taskText state to clear the entered text in the text box
-  }
+  }*/
+  // used in previously submission, not for this time
+
+  ToDoForm.propTypes = {
+    tasks: PropTypes.array.isRequired,
+    onAdd: PropTypes.func.isRequired,
+  };
 
   return (
     <>
